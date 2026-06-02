@@ -1,0 +1,30 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:pm="http://primefaces.org/manhattan">
+
+  <div class="layout-sidebar">
+    <div class="layout-sidebar-logo">
+      <span style="color:white; font-weight:bold;">Biblioteca</span>
+    </div>
+    <div class="layout-menu-container">
+      <h:form id="menuform">
+        <pm:menu widgetVar="ManhattanMenuWidget">
+          <p:menuitem id="mnuLivro" value="Livros"
+            icon="pi pi-fw pi-book" outcome="/admin/livro.xhtml"/>
+          <p:menuitem id="mnuAutor" value="Autores"
+            icon="pi pi-fw pi-user" outcome="/admin/autor.xhtml"/>
+          <p:menuitem id="mnuUsuario" value="Usuários"
+            icon="pi pi-fw pi-users" outcome="/admin/usuariobiblioteca.xhtml"/>
+          <p:menuitem id="mnuEmprestimo" value="Empréstimos"
+            icon="pi pi-fw pi-calendar" outcome="/admin/emprestimo.xhtml"/>
+          <p:menuitem id="mnuSair" value="Sair"
+            action="#{loginController.logout()}"
+            icon="pi pi-fw pi-sign-out"/>
+        </pm:menu>
+      </h:form>
+    </div>
+  </div>
+</ui:composition>
+
