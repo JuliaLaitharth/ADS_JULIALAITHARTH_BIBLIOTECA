@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Usuários - Biblioteca</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmList">
+            <p:growl id="growl" showDetail="true"/>
+
+            <p:dataTable id="tblUsuarios"
+                         value="#{usuarioController.usuarioList}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         selection="#{usuarioController.selected}"
+                         selectionMode="single"
+                         rowKey="#{item.id}">
+
+                <f:facet name="header">
+                    <p:commandButton id="btnNovo"
+                                     value="Novo Usuário"
+                                     icon="pi pi-plus"
+                                     oncomplete="PF('dlgCriar').show()"
+                                     update="frmCriar"
+                                     type="button"/>
+                    <p:commandButton id="btnEditar"
+                                     value="Editar"
+                                     icon="pi pi-pencil"
+                                     oncomplete="PF('dlgEditar').show()"
+                                     disabled="#{usuarioController.selected == null}"
+                                     type="button"/>
+                    <p:commandButton id="btnExcluir"
+                                     value="Excluir"
+                                     icon="pi pi-trash"
+                                     oncomplete="PF('dlgConfirmar').show()"
+                                     disabled="#{usuarioController.selected == null}"
+                                     type="button"/>
+                    <p:commandButton id="btnDetalhe"
+                                     value="Detalhes"
+                                     icon="pi pi-info-circle"
+                                     oncomplete="PF('dlgDetalhe').show()"
+                                     disabled="#{usuarioController.selected == null}"
+                                     type="button"/>
+                </f:facet>
+
+                <p:ajax event="rowSelect"
+                        update="btnEditar btnExcluir btnDetalhe"/>
+                <p:ajax event="rowUnselect"
+                        update="btnEditar btnExcluir btnDetalhe"/>
+
+                <p:column headerText="ID" style="width:60px;">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column headerText="Nome"
+                          sortBy="#{item.nome}"
+                          filterBy="#{item.nome}">
+                    <h:outputText value="#{item.nome}"/>
+                </p:column>
+                <p:column headerText="CPF"
+                          sortBy="#{item.cpf}">
+                    <h:outputText value="#{item.cpf}"/>
+                </p:column>
+                <p:column headerText="E-mail"
+                          sortBy="#{item.email}"
+                          filterBy="#{item.email}">
+                    <h:outputText value="#{item.email}"/>
+                </p:column>
+                <p:column headerText="Limite"
+                          style="width:80px;">
+                    <h:outputText value="#{item.limiteemprestimos}"/>
+                </p:column>
+                <p:column headerText="Ativo"
+                          style="width:70px;">
+                    <h:outputText value="#{item.ativo ? 'Sim' : 'Não'}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog id="dlgCriarId"
+                  header="Novo Usuário"
+                  widgetVar="dlgCriar"
+                  modal="true"
+                  resizable="false">
+            <h:form id="frmCriar">
+                <p:growl id="growlCriar" showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="8">
+
+                    <p:outputLabel for="nome" value="Nome *"/>
+                    <p:inputText id="nome"
+                                 value="#{usuarioController.usuario.nome}"
+                                 required="true"
+                                 requiredMessage="Nome obrigatório"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="cpf" value="CPF *"/>
+                    <p:inputMask id="cpf"
+                                 value="#{usuarioController.usuario.cpf}"
+                                 mask="999.999.999-99"
+                                 required="true"
+                                 requiredMessage="CPF obrigatório"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="email" value="E-mail *"/>
+                    <p:inputText id="email"
+                                 value="#{usuarioController.usuario.email}"
+                                 required="true"
+                                 requiredMessage="E-mail obrigatório"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="senha" value="Senha *"/>
+                    <p:password id="senha"
+                                value="#{usuarioController.usuario.senha}"
+                                required="true"
+                                requiredMessage="Senha obrigatória"
+                                style="width:250px;"/>
+
+                    <p:outputLabel for="limite" value="Limite Empréstimos"/>
+                    <p:inputNumber id="limite"
+                                   value="#{usuarioController.usuario.limiteemprestimos}"
+                                   minValue="1"
+                                   style="width:250px;"/>
+
+                    <p:outputLabel for="ativo" value="Ativo"/>
+                    <p:selectBooleanCheckbox id="ativo"
+                                             value="#{usuarioController.usuario.ativo}"/>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar"
+                                 action="#{usuarioController.adicionarUsuario()}"
+                                 update="frmList growlCriar"
+                                 oncomplete="if(!args.validationFailed) PF('dlgCriar').hide();"
+                                 icon="pi pi-save"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgCriar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dlgEditarId"
+                  header="Editar Usuário"
+                  widgetVar="dlgEditar"
+                  modal="true"
+                  resizable="false">
+            <h:form id="frmEditar">
+                <p:growl id="growlEditar" showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="8">
+
+                    <p:outputLabel for="nomeE" value="Nome *"/>
+                    <p:inputText id="nomeE"
+                                 value="#{usuarioController.selected.nome}"
+                                 required="true"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="cpfE" value="CPF *"/>
+                    <p:inputMask id="cpfE"
+                                 value="#{usuarioController.selected.cpf}"
+                                 mask="999.999.999-99"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="emailE" value="E-mail *"/>
+                    <p:inputText id="emailE"
+                                 value="#{usuarioController.selected.email}"
+                                 required="true"
+                                 style="width:250px;"/>
+
+                    <p:outputLabel for="senhaE" value="Senha"/>
+                    <p:password id="senhaE"
+                                value="#{usuarioController.selected.senha}"
+                                style="width:250px;"/>
+
+                    <p:outputLabel for="limiteE" value="Limite Empréstimos"/>
+                    <p:inputNumber id="limiteE"
+                                   value="#{usuarioController.selected.limiteemprestimos}"
+                                   style="width:250px;"/>
+
+                    <p:outputLabel for="ativoE" value="Ativo"/>
+                    <p:selectBooleanCheckbox id="ativoE"
+                                             value="#{usuarioController.selected.ativo}"/>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar"
+                                 action="#{usuarioController.editarUsuario()}"
+                                 update="frmList growlEditar"
+                                 oncomplete="if(!args.validationFailed) PF('dlgEditar').hide();"
+                                 icon="pi pi-save"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgEditar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:dialog>
+
+        <p:confirmDialog id="dlgConfirmarId"
+                         message="Deseja realmente excluir o usuário selecionado?"
+                         header="Confirmar Exclusão"
+                         severity="warn"
+                         widgetVar="dlgConfirmar">
+            <h:form>
+                <p:commandButton value="Sim, Excluir"
+                                 action="#{usuarioController.deletarUsuario()}"
+                                 update="frmList"
+                                 oncomplete="PF('dlgConfirmar').hide()"
+                                 icon="pi pi-trash"
+                                 styleClass="ui-button-danger"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgConfirmar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:confirmDialog>
+
+        <p:dialog id="dlgDetalheId"
+                  header="Detalhes do Usuário"
+                  widgetVar="dlgDetalhe"
+                  modal="true"
+                  resizable="false">
+            <h:panelGrid columns="2" cellpadding="8">
+                <h:outputText value="Nome:"/>
+                <h:outputText value="#{usuarioController.selected.nome}"
+                              style="font-weight:bold;"/>
+                <h:outputText value="CPF:"/>
+                <h:outputText value="#{usuarioController.selected.cpf}"/>
+                <h:outputText value="E-mail:"/>
+                <h:outputText value="#{usuarioController.selected.email}"/>
+                <h:outputText value="Limite:"/>
+                <h:outputText value="#{usuarioController.selected.limiteemprestimos}"/>
+                <h:outputText value="Ativo:"/>
+                <h:outputText value="#{usuarioController.selected.ativo ? 'Sim' : 'Não'}"/>
+            </h:panelGrid>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

@@ -33,16 +33,17 @@ public class UsuarioBibliotecaFacade extends AbstractFacade<UsuarioBibliotecaEnt
     }
 
     public UsuarioBibliotecaEntity findByEmailSenha(String email, String senha) {
-        try {
-            return em.createQuery(
-                "SELECT u FROM UsuarioBibliotecaEntity u " +
-                "WHERE u.email = :email AND u.senha = :senha",
-                UsuarioBibliotecaEntity.class)
-                .setParameter("email", email)
-                .setParameter("senha", senha)
-                .getSingleResult();
-        } catch (NoResultException e) {
-            return null;
-        }
+      try {
+        return em.createQuery(
+             "SELECT u FROM UsuarioBibliotecaEntity u" +
+             " WHERE u.email = :email AND u.senha = :senha",
+             UsuarioBibliotecaEntity.class)
+             .setParameter("email", email)
+             .setParameter("senha", senha)
+             .getSingleResult();
+      } catch (NoResultException e) {
+        return null;
+      }
     }
+
 }

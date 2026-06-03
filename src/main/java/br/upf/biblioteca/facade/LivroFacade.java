@@ -5,6 +5,7 @@
 package br.upf.biblioteca.facade;
 
 import br.upf.biblioteca.entity.LivroEntity;
+import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import java.util.List;
@@ -28,9 +29,5 @@ public class LivroFacade extends AbstractFacade<LivroEntity> {
     return em.createQuery("SELECT l FROM LivroEntity l ORDER BY l.titulo",
                          LivroEntity.class).getResultList();
   }
-
-    public List<LivroEntity> findAllOrderByTitulo() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 }
 

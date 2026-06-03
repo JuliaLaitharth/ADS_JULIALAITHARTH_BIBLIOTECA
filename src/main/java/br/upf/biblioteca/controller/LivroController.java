@@ -31,6 +31,7 @@ public class LivroController implements Serializable {
   private LivroEntity livro;
   private LivroEntity selected;
   private List<LivroEntity> livroList;
+  private List<LivroEntity> filteredList;
 
   @PostConstruct
   public void init() { prepareCreate(); }
@@ -44,6 +45,13 @@ public class LivroController implements Serializable {
       livroList = livroFacade.findAllOrderByTitulo();
     }
     return livroList;
+  }
+  
+  public List<LivroEntity> getFilteredList() { 
+      return filteredList; 
+  }
+  public void setFilteredList(List<LivroEntity> filteredList) { 
+      this.filteredList = filteredList; 
   }
 
   public List<AutorEntity> getAutorList() {

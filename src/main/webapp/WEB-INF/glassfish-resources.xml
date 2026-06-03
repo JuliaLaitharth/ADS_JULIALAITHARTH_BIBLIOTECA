@@ -6,7 +6,7 @@
         <property name="portNumber" value="5432"/>
         <property name="databaseName" value="dbbiblioteca"/>
         <property name="User" value="julialaitharth"/>
-        <property name="Password" value="20042004"/>
+        <property name="Password" value=""/>
         <property name="URL" value="jdbc:postgresql://localhost:5432/dbbiblioteca"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>

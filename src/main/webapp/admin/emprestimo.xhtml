@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">Empréstimos - Biblioteca</ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmList">
+            <p:growl id="growl" showDetail="true"/>
+
+            <p:dataTable id="tblEmprestimos"
+                         value="#{emprestimoController.emprestimoList}"
+                         var="item"
+                         paginator="true"
+                         rows="10"
+                         selection="#{emprestimoController.selected}"
+                         selectionMode="single"
+                         rowKey="#{item.id}">
+
+                <f:facet name="header">
+                    <p:commandButton id="btnNovo"
+                                     value="Novo Empréstimo"
+                                     icon="pi pi-plus"
+                                     oncomplete="PF('dlgCriar').show()"
+                                     update="frmCriar"
+                                     type="button"/>
+                    <p:commandButton id="btnEditar"
+                                     value="Editar"
+                                     icon="pi pi-pencil"
+                                     oncomplete="PF('dlgEditar').show()"
+                                     disabled="#{emprestimoController.selected == null}"
+                                     type="button"/>
+                    <p:commandButton id="btnExcluir"
+                                     value="Excluir"
+                                     icon="pi pi-trash"
+                                     oncomplete="PF('dlgConfirmar').show()"
+                                     disabled="#{emprestimoController.selected == null}"
+                                     type="button"/>
+                    <p:commandButton id="btnDetalhe"
+                                     value="Detalhes"
+                                     icon="pi pi-info-circle"
+                                     oncomplete="PF('dlgDetalhe').show()"
+                                     disabled="#{emprestimoController.selected == null}"
+                                     type="button"/>
+                </f:facet>
+
+                <p:ajax event="rowSelect"
+                        update="btnEditar btnExcluir btnDetalhe"/>
+                <p:ajax event="rowUnselect"
+                        update="btnEditar btnExcluir btnDetalhe"/>
+
+                <p:column headerText="ID" style="width:60px;">
+                    <h:outputText value="#{item.id}"/>
+                </p:column>
+                <p:column headerText="Livro"
+                          sortBy="#{item.livro.titulo}"
+                          filterBy="#{item.livro.titulo}">
+                    <h:outputText value="#{item.livro.titulo}"/>
+                </p:column>
+                <p:column headerText="Usuário"
+                          sortBy="#{item.usuario.nome}"
+                          filterBy="#{item.usuario.nome}">
+                    <h:outputText value="#{item.usuario.nome}"/>
+                </p:column>
+                <p:column headerText="Retirada"
+                          sortBy="#{item.dtretirada}">
+                    <h:outputText value="#{item.dtretirada}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Prev. Devolução"
+                          sortBy="#{item.dtprevdevolucao}">
+                    <h:outputText value="#{item.dtprevdevolucao}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Status"
+                          sortBy="#{item.status}">
+                    <h:outputText value="#{item.status}"/>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+
+        <p:dialog id="dlgCriarId"
+                  header="Novo Empréstimo"
+                  widgetVar="dlgCriar"
+                  modal="true"
+                  resizable="false">
+            <h:form id="frmCriar">
+                <p:growl id="growlCriar" showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="8">
+
+                    <p:outputLabel for="livro" value="Livro *"/>
+                    <p:selectOneMenu id="livro"
+                                     value="#{emprestimoController.emprestimo.livro}"
+                                     required="true"
+                                     requiredMessage="Selecione um livro"
+                                     style="width:250px;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
+                        <f:selectItems value="#{emprestimoController.livroList}"
+                                       var="l"
+                                       itemLabel="#{l.titulo}"
+                                       itemValue="#{l}"/>
+                        <f:converter converterId="jakarta.faces.Integer"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="usuario" value="Usuário *"/>
+                    <p:selectOneMenu id="usuario"
+                                     value="#{emprestimoController.emprestimo.usuario}"
+                                     required="true"
+                                     requiredMessage="Selecione um usuário"
+                                     style="width:250px;">
+                        <f:selectItem itemLabel="Selecione..." itemValue="#{null}"/>
+                        <f:selectItems value="#{emprestimoController.usuarioList}"
+                                       var="u"
+                                       itemLabel="#{u.nome}"
+                                       itemValue="#{u}"/>
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="dtretirada" value="Data Retirada *"/>
+                    <p:datePicker id="dtretirada"
+                                  value="#{emprestimoController.emprestimo.dtretirada}"
+                                  pattern="dd/MM/yyyy"
+                                  required="true"
+                                  style="width:250px;"/>
+
+                    <p:outputLabel for="dtprev" value="Prev. Devolução *"/>
+                    <p:datePicker id="dtprev"
+                                  value="#{emprestimoController.emprestimo.dtprevdevolucao}"
+                                  pattern="dd/MM/yyyy"
+                                  required="true"
+                                  style="width:250px;"/>
+
+                    <p:outputLabel for="status" value="Status"/>
+                    <p:selectOneMenu id="status"
+                                     value="#{emprestimoController.emprestimo.status}"
+                                     style="width:250px;">
+                        <f:selectItem itemLabel="Aberto" itemValue="ABERTO"/>
+                        <f:selectItem itemLabel="Devolvido" itemValue="DEVOLVIDO"/>
+                        <f:selectItem itemLabel="Atrasado" itemValue="ATRASADO"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar"
+                                 action="#{emprestimoController.adicionarEmprestimo()}"
+                                 update="frmList growlCriar"
+                                 oncomplete="if(!args.validationFailed) PF('dlgCriar').hide();"
+                                 icon="pi pi-save"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgCriar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:dialog>
+
+        <p:dialog id="dlgEditarId"
+                  header="Editar Empréstimo"
+                  widgetVar="dlgEditar"
+                  modal="true"
+                  resizable="false">
+            <h:form id="frmEditar">
+                <p:growl id="growlEditar" showDetail="true"/>
+                <h:panelGrid columns="2" cellpadding="8">
+
+                    <p:outputLabel for="dtretiradaE" value="Data Retirada"/>
+                    <p:datePicker id="dtretiradaE"
+                                  value="#{emprestimoController.selected.dtretirada}"
+                                  pattern="dd/MM/yyyy"
+                                  style="width:250px;"/>
+
+                    <p:outputLabel for="dtprevE" value="Prev. Devolução"/>
+                    <p:datePicker id="dtprevE"
+                                  value="#{emprestimoController.selected.dtprevdevolucao}"
+                                  pattern="dd/MM/yyyy"
+                                  style="width:250px;"/>
+
+                    <p:outputLabel for="dtdevE" value="Data Devolução"/>
+                    <p:datePicker id="dtdevE"
+                                  value="#{emprestimoController.selected.dtdevolucao}"
+                                  pattern="dd/MM/yyyy"
+                                  style="width:250px;"/>
+
+                    <p:outputLabel for="statusE" value="Status"/>
+                    <p:selectOneMenu id="statusE"
+                                     value="#{emprestimoController.selected.status}"
+                                     style="width:250px;">
+                        <f:selectItem itemLabel="Aberto" itemValue="ABERTO"/>
+                        <f:selectItem itemLabel="Devolvido" itemValue="DEVOLVIDO"/>
+                        <f:selectItem itemLabel="Atrasado" itemValue="ATRASADO"/>
+                    </p:selectOneMenu>
+
+                </h:panelGrid>
+
+                <p:commandButton value="Salvar"
+                                 action="#{emprestimoController.editarEmprestimo()}"
+                                 update="frmList growlEditar"
+                                 oncomplete="if(!args.validationFailed) PF('dlgEditar').hide();"
+                                 icon="pi pi-save"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgEditar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:dialog>
+
+        <p:confirmDialog id="dlgConfirmarId"
+                         message="Deseja realmente excluir o empréstimo selecionado?"
+                         header="Confirmar Exclusão"
+                         severity="warn"
+                         widgetVar="dlgConfirmar">
+            <h:form>
+                <p:commandButton value="Sim, Excluir"
+                                 action="#{emprestimoController.deletarEmprestimo()}"
+                                 update="frmList"
+                                 oncomplete="PF('dlgConfirmar').hide()"
+                                 icon="pi pi-trash"
+                                 styleClass="ui-button-danger"/>
+                <p:commandButton value="Cancelar"
+                                 type="button"
+                                 onclick="PF('dlgConfirmar').hide()"
+                                 icon="pi pi-times"
+                                 styleClass="ui-button-secondary"/>
+            </h:form>
+        </p:confirmDialog>
+
+        <p:dialog id="dlgDetalheId"
+                  header="Detalhes do Empréstimo"
+                  widgetVar="dlgDetalhe"
+                  modal="true"
+                  resizable="false">
+            <h:panelGrid columns="2" cellpadding="8">
+                <h:outputText value="Livro:"/>
+                <h:outputText value="#{emprestimoController.selected.livro.titulo}"
+                              style="font-weight:bold;"/>
+                <h:outputText value="Usuário:"/>
+                <h:outputText value="#{emprestimoController.selected.usuario.nome}"/>
+                <h:outputText value="Data Retirada:"/>
+                <h:outputText value="#{emprestimoController.selected.dtretirada}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+                <h:outputText value="Prev. Devolução:"/>
+                <h:outputText value="#{emprestimoController.selected.dtprevdevolucao}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+                <h:outputText value="Data Devolução:"/>
+                <h:outputText value="#{emprestimoController.selected.dtdevolucao}">
+                    <f:convertDateTime pattern="dd/MM/yyyy"/>
+                </h:outputText>
+                <h:outputText value="Status:"/>
+                <h:outputText value="#{emprestimoController.selected.status}"/>
+            </h:panelGrid>
+        </p:dialog>
+
+    </ui:define>
+</ui:composition>

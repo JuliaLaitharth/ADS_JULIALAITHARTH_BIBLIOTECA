@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="title">
+        Login - Biblioteca
+    </ui:define>
+
+    <ui:define name="content">
+        <h:form id="frmLogin">
+
+            <p:growl id="growl" showDetail="true"/>
+
+            <div style="display:flex; justify-content:center; margin-top:80px;">
+                <p:panel header="Biblioteca - Acesso ao Sistema"
+                         style="width:420px;">
+
+                    <h:panelGrid columns="2" cellpadding="8"
+                                 style="width:100%;">
+
+                        <p:outputLabel for="email" value="E-mail:"/>
+                        <p:inputText id="email"
+                                     value="#{loginController.usuario.email}"
+                                     required="true"
+                                     requiredMessage="E-mail obrigatório"
+                                     style="width:220px;"/>
+
+                        <p:outputLabel for="senha" value="Senha:"/>
+                        <p:password id="senha"
+                                    value="#{loginController.usuario.senha}"
+                                    required="true"
+                                    requiredMessage="Senha obrigatória"
+                                    style="width:220px;"/>
+
+                    </h:panelGrid>
+
+                    <br/>
+
+                    <p:commandButton value="Entrar"
+                                     action="#{loginController.validarLogin()}"
+                                     update="growl"
+                                     icon="pi pi-sign-in"
+                                     style="width:100%;"/>
+
+                </p:panel>
+            </div>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

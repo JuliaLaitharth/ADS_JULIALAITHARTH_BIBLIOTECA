@@ -1,2 +1,17 @@
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/upf/br/biblioteca/JakartaRestConfiguration.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/entity/EmprestimoEntity.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/upf/br/biblioteca/resources/JakartaEE10Resource.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/entity/UsuarioBibliotecaEntity.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/AbstractFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/AutorController.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/EmprestimoController.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/EmprestimoFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/AutorFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/LoginController.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/LivroFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/filter/FiltroAdministrativo.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/entity/AutorEntity.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/UsuarioBibliotecaFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/UsuarioBibliotecaController.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/LivroController.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/entity/LivroEntity.java
