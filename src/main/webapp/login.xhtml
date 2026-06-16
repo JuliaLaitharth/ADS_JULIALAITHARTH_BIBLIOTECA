@@ -7,6 +7,37 @@
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 template="/WEB-INF/template.xhtml">
 
+    
+
+    
+
+    
+
+    <ui:define name="head">
+        <style>
+            html, body {
+                background-color: #2b2b2b !important;
+                background-image: url('http://localhost:8080/biblioteca.jpg') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                background-attachment: fixed !important;
+                color: #ffffff !important;
+            }
+            .layout-wrapper, .layout-main, .layout-content, .layout-topbar {
+                background-color: transparent !important;
+                background: transparent !important;
+            }
+            .ui-panel, .ui-panel-content, .ui-panel-titlebar {
+                background-color: rgba(40, 40, 40, 0.85) !important;
+                color: #ffffff !important;
+                border-color: #555 !important;
+            }
+            .ui-outputlabel {
+                color: #cccccc !important;
+            }
+        </style>
+    </ui:define>
+
     <ui:define name="title">
         Login - Biblioteca
     </ui:define>
@@ -43,7 +74,7 @@
 
                     <p:commandButton value="Entrar"
                                      action="#{loginController.validarLogin()}"
-                                     update="growl"
+                                     ajax="false"
                                      icon="pi pi-sign-in"
                                      style="width:100%;"/>
 

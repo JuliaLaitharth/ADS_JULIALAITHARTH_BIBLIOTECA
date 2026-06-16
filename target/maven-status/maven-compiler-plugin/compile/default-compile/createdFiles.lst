@@ -8,10 +8,13 @@ br/upf/biblioteca/controller/LivroController.class
 br/upf/biblioteca/filter/FiltroAdministrativo.class
 upf/br/biblioteca/JakartaRestConfiguration.class
 br/upf/biblioteca/entity/AutorEntity.class
+br/upf/biblioteca/controller/LivroConverter.class
 upf/br/biblioteca/resources/JakartaEE10Resource.class
 br/upf/biblioteca/controller/UsuarioBibliotecaController.class
+br/upf/biblioteca/controller/UsuarioConverter.class
 br/upf/biblioteca/entity/UsuarioBibliotecaEntity.class
 br/upf/biblioteca/facade/UsuarioBibliotecaFacade.class
 br/upf/biblioteca/facade/AutorFacade.class
 br/upf/biblioteca/entity/LivroEntity.class
 br/upf/biblioteca/controller/EmprestimoController.class
+br/upf/biblioteca/controller/AutorConverter.class

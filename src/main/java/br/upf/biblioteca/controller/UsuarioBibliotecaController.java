@@ -10,14 +10,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.view.ViewScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Named(value = "usuarioController")
-@ViewScoped
+@SessionScoped
 public class UsuarioBibliotecaController implements Serializable {
 
     @EJB

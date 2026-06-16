@@ -14,14 +14,14 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ejb.EJB;
 import jakarta.faces.application.FacesMessage;
 import jakarta.faces.context.FacesContext;
-import jakarta.faces.view.ViewScoped;
+import jakarta.enterprise.context.SessionScoped;
 import jakarta.inject.Named;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
 @Named(value = "emprestimoController")
-@ViewScoped
+@SessionScoped
 public class EmprestimoController implements Serializable {
 
     @EJB
@@ -64,6 +64,24 @@ public class EmprestimoController implements Serializable {
 
     public void adicionarEmprestimo() {
         try {
+            LivroEntity livro = emprestimo.getLivro();
+            if (livro != null) {
+                long emprestimosAbertos = emprestimoFacade.countEmprestimosAbertosPorLivro(livro.getId());
+                int totalExemplares = livro.getExemplares() != null ? livro.getExemplares() : 0;
+                if (emprestimosAbertos >= totalExemplares) {
+                    addErrorMessage("Todos os exemplares de '" + livro.getTitulo() + "' já estão emprestados!");
+                    return;
+                }
+            }
+            UsuarioBibliotecaEntity usuario = emprestimo.getUsuario();
+            if (usuario != null) {
+                long emprestimosUsuario = emprestimoFacade.countEmprestimosAbertosPorUsuario(usuario.getId());
+                int limite = usuario.getLimiteemprestimos() != null ? usuario.getLimiteemprestimos() : 0;
+                if (emprestimosUsuario >= limite) {
+                    addErrorMessage("Usuário '" + usuario.getNome() + "' atingiu o limite de " + limite + " empréstimo(s)!");
+                    return;
+                }
+            }
             emprestimo.setDatahorareg(new Date());
             emprestimoFacade.create(emprestimo);
             emprestimoList = null;

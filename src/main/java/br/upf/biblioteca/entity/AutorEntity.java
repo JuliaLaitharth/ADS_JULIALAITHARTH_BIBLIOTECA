@@ -83,5 +83,19 @@ public class AutorEntity implements Serializable {
     public void setLivros(List<LivroEntity> livros) {
         this.livros = livros;
     }
+    
+    @Override
+    public int hashCode() {
+        return (id != null) ? id.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof AutorEntity)) return false;
+        AutorEntity other = (AutorEntity) obj;
+        return (id != null) && id.equals(other.id);
+    }
 
 }

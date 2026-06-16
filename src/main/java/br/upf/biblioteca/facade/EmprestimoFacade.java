@@ -37,4 +37,20 @@ public class EmprestimoFacade extends AbstractFacade<EmprestimoEntity> {
             "WHERE e.status = 'ABERTO' ORDER BY e.dtprevdevolucao",
             EmprestimoEntity.class).getResultList();
     }
+    public long countEmprestimosAbertosPorLivro(Integer idLivro) {
+        return em.createQuery(
+            "SELECT COUNT(e) FROM EmprestimoEntity e " +
+            "WHERE e.livro.id = :idLivro AND e.status = 'ABERTO'",
+            Long.class)
+            .setParameter("idLivro", idLivro)
+            .getSingleResult();
+    }
+    public long countEmprestimosAbertosPorUsuario(Integer idUsuario) {
+        return em.createQuery(
+            "SELECT COUNT(e) FROM EmprestimoEntity e " +
+            "WHERE e.usuario.id = :idUsuario AND e.status = 'ABERTO'",
+            Long.class)
+            .setParameter("idUsuario", idUsuario)
+            .getSingleResult();
+    }
 }

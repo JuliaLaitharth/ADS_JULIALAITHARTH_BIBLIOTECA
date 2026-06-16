@@ -7,6 +7,8 @@
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/EmprestimoController.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/EmprestimoFacade.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/AutorFacade.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/AutorConverter.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/UsuarioConverter.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/LoginController.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/facade/LivroFacade.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/filter/FiltroAdministrativo.java
@@ -15,3 +17,4 @@
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/UsuarioBibliotecaController.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/LivroController.java
 /Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/entity/LivroEntity.java
+/Users/julialaitharth/Downloads/ADS_JULIALAITHARTH_LIVRARIA/biblioteca/src/main/java/br/upf/biblioteca/controller/LivroConverter.java

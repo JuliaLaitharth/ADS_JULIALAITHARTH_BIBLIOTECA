@@ -17,10 +17,51 @@
     <h:outputScript name="js/layout.js" library="manhattan-layout"/>
     <h:outputScript name="js/prism.js" library="manhattan-layout"/>
     <ui:insert name="head"/>
+    <h:outputStylesheet>
+        <![CDATA[
+            html, body {
+                background-color: #1e1e1e !important;
+                color: #e0e0e0 !important;
+            }
+            .layout-wrapper, .layout-main, .layout-content, .layout-sidebar, .layout-topbar {
+                background-color: #1e1e1e !important;
+            }
+            .ui-datatable, .ui-datatable thead th, .ui-datatable tbody td {
+                background-color: #2b2b2b !important;
+                color: #e0e0e0 !important;
+                border-color: #444 !important;
+            }
+            .ui-datatable tbody tr:hover td {
+                background-color: #3a3a3a !important;
+            }
+            .ui-datatable tbody tr.ui-state-highlight td {
+                background-color: #0288d1 !important;
+                color: #ffffff !important;
+            }
+            .ui-panel, .ui-panel-content, .ui-panel-titlebar,
+            .ui-dialog, .ui-dialog-content, .ui-dialog-titlebar {
+                background-color: #2b2b2b !important;
+                color: #e0e0e0 !important;
+                border-color: #444 !important;
+            }
+            .ui-inputtext, .ui-inputtextarea, .ui-password input {
+                background-color: #3c3c3c !important;
+                color: #e0e0e0 !important;
+                border-color: #555 !important;
+            }
+            .ui-outputlabel, label {
+                color: #cccccc !important;
+            }
+            .ui-paginator {
+                background-color: #2b2b2b !important;
+                color: #e0e0e0 !important;
+            }
+        ]]>
+    </h:outputStylesheet>
 </h:head>
 
 <h:body>
-    <div class="layout-wrapper layout-slim layout-light">
+    <div class="layout-wrapper layout-slim layout-dark">
         <div class="layout-main">
             <ui:include src="./topbar.xhtml"/>
 
@@ -48,9 +89,10 @@
         </f:facet>
     </p:ajaxStatus>
 
+    <h:outputStylesheet name="dark-theme.css"/>
     <h:outputStylesheet name="css/primeicons.css" library="manhattan-layout"/>
     <h:outputStylesheet name="css/primeflex.min.css" library="manhattan-layout"/>
-    <h:outputStylesheet name="css/layout-cyan-deeporange.css" library="manhattan-layout" />
+    <h:outputStylesheet name="css/layout-blue-grey.css" library="manhattan-layout" />
 </h:body>
 
 </html>

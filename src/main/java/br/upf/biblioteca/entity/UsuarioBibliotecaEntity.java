@@ -94,5 +94,18 @@ public class UsuarioBibliotecaEntity implements Serializable {
         this.ativo = ativo;
     }
   
+    @Override
+    public int hashCode() {
+        return (id != null) ? id.hashCode() : 0;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (!(obj instanceof UsuarioBibliotecaEntity)) return false;
+        UsuarioBibliotecaEntity other = (UsuarioBibliotecaEntity) obj;
+        return (id != null) && id.equals(other.id);
+    }
 }
 
