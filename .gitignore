@@ -1,3 +1,12 @@
+# macOS
+.DS_Store
+
+# Maven
 target/
-*.class
-*.war
+
+# NetBeans
+nb-configuration.xml
+jshell.history
+
+# Pasta WEB-INF gerada na raiz (build antigo)
+/WEB-INF/
