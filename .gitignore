@@ -10,3 +10,4 @@ jshell.history
 
 # Pasta WEB-INF gerada na raiz (build antigo)
 /WEB-INF/
+jshell.history
