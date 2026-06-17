@@ -91,7 +91,7 @@
                     <p:selectManyMenu id="autores"
                                       value="#{livroController.livro.autores}"
                                       converter="autorConverter"
-                                      style="width:250px; height:120px;">
+                                      style="width:250px; height:80px; overflow-y:auto;">
                         <f:selectItems value="#{livroController.autorList}"
                                        var="a"
                                        itemLabel="#{a.nome}"
@@ -134,17 +134,17 @@
                     <p:inputNumber id="exemplaresE"
                                    value="#{livroController.selected.exemplares}"
                                    decimalPlaces="0" style="width:250px;"/>
-                    <p:outputLabel for="resumoE" value="Resumo"/>
                     <p:outputLabel for="autoresE" value="Autores"/>
                     <p:selectManyMenu id="autoresE"
                                       value="#{livroController.selected.autores}"
                                       converter="autorConverter"
-                                      style="width:250px; height:120px;">
+                                      style="width:250px; height:80px; overflow-y:auto;">
                         <f:selectItems value="#{livroController.autorList}"
                                        var="a"
                                        itemLabel="#{a.nome}"
                                        itemValue="#{a}"/>
                     </p:selectManyMenu>
+                    <p:outputLabel for="resumoE" value="Resumo"/>
                     <p:inputTextarea id="resumoE"
                                      value="#{livroController.selected.resumo}"
                                      rows="4" cols="30"/>
